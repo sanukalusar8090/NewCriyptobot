@@ -100,10 +100,15 @@ def home():
     return "Bot is running!", 200
 
 
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["GET", "POST"])
 def webhook():
+    # ✅ GET method test
+    if request.method == "GET":
+        return "Webhook working (GET)", 200
+
+    # ✅ POST method from Telegram
     update = request.get_json()
-    print(update)  # Debug logs
+    print(update)  # Render logs me dikhega
 
     if not update:
         return "no update", 200
